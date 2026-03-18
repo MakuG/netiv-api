@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       })
     });
     const campData = await campRes.json();
-    if (campData.error) throw new Error(`Campaña: ${campData.error.message}`);
+    if (campData.error) throw new Error(`Campaña: ${campData.error.message} | code: ${campData.error.code} | subcode: ${campData.error.error_subcode} | type: ${campData.error.type}`);
     const campaignId = campData.id;
 
     // 2. Create Ad Sets
