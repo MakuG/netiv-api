@@ -1,10 +1,10 @@
 const OBJ_MAP = {
-  mensajes:      { objective: 'MESSAGES',          optimization_goal: 'CONVERSATIONS',       billing_event: 'IMPRESSIONS' },
-  conversiones:  { objective: 'OUTCOME_SALES',     optimization_goal: 'OFFSITE_CONVERSIONS', billing_event: 'IMPRESSIONS' },
-  trafico:       { objective: 'OUTCOME_TRAFFIC',   optimization_goal: 'LINK_CLICKS',         billing_event: 'IMPRESSIONS' },
-  leads:         { objective: 'OUTCOME_LEADS',     optimization_goal: 'LEAD_GENERATION',     billing_event: 'IMPRESSIONS' },
-  reconocimiento:{ objective: 'OUTCOME_AWARENESS', optimization_goal: 'REACH',               billing_event: 'IMPRESSIONS' },
-  engagement:    { objective: 'OUTCOME_ENGAGEMENT',optimization_goal: 'POST_ENGAGEMENT',     billing_event: 'IMPRESSIONS' },
+  mensajes:      { objective: 'OUTCOME_ENGAGEMENT', optimization_goal: 'CONVERSATIONS',       billing_event: 'IMPRESSIONS', destination_type: 'WHATSAPP' },
+  conversiones:  { objective: 'OUTCOME_SALES',      optimization_goal: 'OFFSITE_CONVERSIONS', billing_event: 'IMPRESSIONS' },
+  trafico:       { objective: 'OUTCOME_TRAFFIC',    optimization_goal: 'LINK_CLICKS',         billing_event: 'IMPRESSIONS' },
+  leads:         { objective: 'OUTCOME_LEADS',      optimization_goal: 'LEAD_GENERATION',     billing_event: 'IMPRESSIONS' },
+  reconocimiento:{ objective: 'OUTCOME_AWARENESS',  optimization_goal: 'REACH',               billing_event: 'IMPRESSIONS' },
+  engagement:    { objective: 'OUTCOME_ENGAGEMENT', optimization_goal: 'POST_ENGAGEMENT',     billing_event: 'IMPRESSIONS' },
 };
 
 export default async function handler(req, res) {
@@ -36,6 +36,7 @@ export default async function handler(req, res) {
         objective: objConfig.objective,
         status: 'PAUSED',
         special_ad_categories: [],
+        ...(objConfig.destination_type ? { destination_type: objConfig.destination_type } : {}),
         access_token
       })
     });
